@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Power | Contact</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="navbar">
+            <a href="index.html" class="logo">LOAN <span>POWER</span></a>
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="about.html">About Me</a>
+                <a href="contact.html" class="active">Enquire Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-banner">
+        <span class="tag">CONTACT US</span>
+        <h1>Let's Discuss Your Requirements.</h1>
+        <p>Tell us what kind of loan you are looking for.</p>
+    </section>
+
+    <section class="section contact-section">
+        <form class="contact-form" id="enquiryForm">
+            <h2>Send an Enquiry</h2>
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name" placeholder="Enter your full name" required>
+
+            <label for="phone">Mobile Number</label>
+            <input type="tel" id="phone" placeholder="Enter your mobile number" required>
+
+            <label for="loan">Select Loan Type</label>
+            <select id="loan" required>
+                <option value="">Choose a loan type</option>
+                <option value="Home Loans">Home Loans</option>
+                <option value="Personal Loans">Personal Loans</option>
+                <option value="Business Loans">Business Loans</option>
+                <option value="Loan Against Property">Loan Against Property</option>
+                <option value="Education Loans">Education Loans</option>
+                <option value="Other Loans">Other Loans</option>
+            </select>
+
+            <label for="message">Your Message</label>
+            <textarea id="message" placeholder="Write your requirements here..."></textarea>
+
+            <button type="submit" class="primary-btn">Submit Enquiry →</button>
+            <p class="form-message" id="formMessage"></p>
+
+            <p>
+                Or email me directly at
+                <a id="email-link" href="#">loan.power007@gmail.com</a>
+            </p>
+        </form>
+    </section>
+
+    <footer>
+        <a href="index.html" class="logo footer-logo">LOAN <span>POWER</span>.</a>
+        <p>Independent loan consultancy. Not an official website of any bank.</p>
+        <p>© 2026 Loan Power. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
