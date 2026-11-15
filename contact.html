@@ -31,31 +31,28 @@
         <form class="contact-form" id="enquiryForm">
             <h2>Send an Enquiry</h2>
 
-            <!-- Replace YOUR_ACCESS_KEY_HERE with the key from your Gmail -->
-            <input type="hidden" name="access_key" value="c664ab33-9afe-4932-aa1f-8013d8fbecfc">
-            <input type="hidden" name="subject" value="New Loan Power Website Enquiry">
-
             <label for="name">Full Name</label>
-            <input type="text" id="name" name="Full Name" placeholder="Enter your full name" required>
+            <input type="text" id="name" placeholder="Enter your full name" required>
 
             <label for="phone">Mobile Number</label>
-            <input type="tel" id="phone" name="Mobile Number" placeholder="Enter your mobile number" required>
+            <input type="tel" id="phone" placeholder="Enter your mobile number" required>
 
             <label for="loan">Select Loan Type</label>
-            <select id="loan" name="Loan Type" required>
+            <select id="loan" required>
                 <option value="">Choose a loan type</option>
                 <option value="Home Loans">Home Loans</option>
                 <option value="Personal Loans">Personal Loans</option>
                 <option value="Business Loans">Business Loans</option>
+                <option value="Car Loans">Car Loans</option>
                 <option value="Loan Against Property">Loan Against Property</option>
                 <option value="Education Loans">Education Loans</option>
                 <option value="Other Loans">Other Loans</option>
             </select>
 
             <label for="message">Your Message</label>
-            <textarea id="message" name="Message" placeholder="Write your requirements here..."></textarea>
+            <textarea id="message" placeholder="Write your requirements here..."></textarea>
 
-            <button type="submit" class="primary-btn" id="submitBtn">Submit Enquiry →</button>
+            <button type="submit" class="primary-btn">Submit Enquiry →</button>
             <p class="form-message" id="formMessage"></p>
 
             <p>

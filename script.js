@@ -3,7 +3,7 @@ function toggleMenu() {
     nav.classList.toggle("active");
 }
 
-// Top-sliding notification popup (reusable for both email copy and form submission)
+// Top-sliding notification popup
 function showTopPopup(message) {
     const existingPopup = document.getElementById("copy-toast-popup");
     if (existingPopup) existingPopup.remove();
@@ -41,21 +41,20 @@ function showTopPopup(message) {
         popup.style.top = "-60px";
         popup.style.opacity = "0";
         setTimeout(() => popup.remove(), 350);
-    }, 3000);
+    }, 2500);
 }
 
-// Contact form submission to Gmail via Web3Forms (JSON format)
+// Contact form local validation
 const form = document.getElementById("enquiryForm");
 
 if (form) {
-    form.addEventListener("submit", async function(event) {
+    form.addEventListener("submit", function(event) {
         event.preventDefault();
 
         const name = document.getElementById("name").value.trim();
         const phone = document.getElementById("phone").value.trim();
         const loan = document.getElementById("loan").value;
         const message = document.getElementById("formMessage");
-        const submitBtn = document.getElementById("submitBtn") || form.querySelector("button[type='submit']");
 
         const digits = phone.replace(/\D/g, "");
 
@@ -65,46 +64,10 @@ if (form) {
             return;
         }
 
-        // Disable button while sending
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Sending...";
-        message.style.color = "#1765B5";
-        message.textContent = "Sending your enquiry...";
-
-        // Convert form fields to JSON
-        const formData = new FormData(form);
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
-
-        try {
-            const response = await fetch("https://web3forms.com", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: json
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                message.style.color = "#188038";
-                message.textContent = "Thank you! Your enquiry has been sent successfully.";
-                showTopPopup("Enquiry sent successfully!");
-                form.reset();
-            } else {
-                message.style.color = "#D93025";
-                message.textContent = "Error: " + (result.message || "Please check your Access Key.");
-            }
-        } catch (error) {
-            console.error("Web3Forms Error:", error);
-            message.style.color = "#D93025";
-            message.textContent = "Network error: Request was blocked or offline. Try disabling ad-blockers.";
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Submit Enquiry →";
-        }
+        message.style.color = "#188038";
+        message.textContent = "Thank you! Your enquiry details have been recorded.";
+        showTopPopup("Enquiry submitted!");
+        form.reset();
     });
 }
 

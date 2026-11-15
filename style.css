@@ -68,7 +68,7 @@ header {
     color: var(--blue);
 }
 
-.nav-button, .primary-btn {
+.primary-btn {
     background: var(--blue);
     color: white;
     text-decoration: none;
@@ -81,7 +81,7 @@ header {
     display: inline-block;
 }
 
-.nav-button:hover, .primary-btn:hover {
+.primary-btn:hover {
     background: var(--dark);
 }
 
@@ -268,6 +268,13 @@ header {
     font-size: 18px;
 }
 
+.loan-item p {
+    color: var(--text);
+    font-size: 14px;
+    margin-top: 5px;
+    line-height: 1.6;
+}
+
 .center-button {
     text-align: center;
     margin-top: 40px;
@@ -412,10 +419,6 @@ footer p {
 
     .nav-links.active {
         display: flex;
-    }
-
-    .nav-button {
-        display: none;
     }
 
     .menu-btn {
