@@ -1,3 +1,6 @@
+// PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BETWEEN THE QUOTES BELOW:
+const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_WEB_APP_URL_HERE";
+
 function toggleMenu() {
     const nav = document.getElementById("navLinks");
     nav.classList.toggle("active");
@@ -41,33 +44,62 @@ function showTopPopup(message) {
         popup.style.top = "-60px";
         popup.style.opacity = "0";
         setTimeout(() => popup.remove(), 350);
-    }, 2500);
+    }, 3000);
 }
 
-// Contact form local validation
+// Contact form submission to Google Sheets
 const form = document.getElementById("enquiryForm");
 
 if (form) {
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", async function(event) {
         event.preventDefault();
 
         const name = document.getElementById("name").value.trim();
         const phone = document.getElementById("phone").value.trim();
         const loan = document.getElementById("loan").value;
-        const message = document.getElementById("formMessage");
+        const userMessage = document.getElementById("message").value.trim();
+        const statusText = document.getElementById("formMessage");
+        const submitBtn = form.querySelector("button[type='submit']");
 
         const digits = phone.replace(/\D/g, "");
 
         if (!name || digits.length < 10 || digits.length > 15 || !loan) {
-            message.style.color = "#D93025";
-            message.textContent = "Please enter valid details and select a loan type.";
+            statusText.style.color = "#D93025";
+            statusText.textContent = "Please enter valid details and select a loan type.";
             return;
         }
 
-        message.style.color = "#188038";
-        message.textContent = "Thank you! Your enquiry details have been recorded.";
-        showTopPopup("Enquiry submitted!");
-        form.reset();
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting...";
+        statusText.style.color = "#1765B5";
+        statusText.textContent = "Saving your enquiry...";
+
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    phone: phone,
+                    loan: loan,
+                    message: userMessage
+                })
+            });
+
+            statusText.style.color = "#188038";
+            statusText.textContent = "Thank you! Your enquiry has been submitted successfully.";
+            showTopPopup("Enquiry submitted!");
+            form.reset();
+        } catch (error) {
+            statusText.style.color = "#D93025";
+            statusText.textContent = "Something went wrong. Please try again.";
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Enquiry →";
+        }
     });
 }
 
