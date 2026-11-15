@@ -1,5 +1,4 @@
-// PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BETWEEN THE QUOTES BELOW:
-const GOOGLE_SCRIPT_URL = "YOUR_GOOGLE_WEB_APP_URL_HERE";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx6O-1D8qsoYeSjCjC75S414q78AZuy-d6EM5br8MRoO8b9cjEwLXRUFO1MfU9jA46T/exec";
 
 function toggleMenu() {
     const nav = document.getElementById("navLinks");
@@ -79,7 +78,7 @@ if (form) {
                 method: "POST",
                 mode: "no-cors",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "text/plain"
                 },
                 body: JSON.stringify({
                     name: name,
