@@ -3,7 +3,7 @@ function toggleMenu() {
     nav.classList.toggle("active");
 }
 
-// Top-sliding notification popup
+// Top-sliding notification popup (reusable for both email copy and form submission)
 function showTopPopup(message) {
     const existingPopup = document.getElementById("copy-toast-popup");
     if (existingPopup) existingPopup.remove();
@@ -44,7 +44,7 @@ function showTopPopup(message) {
     }, 3000);
 }
 
-// Contact form submission to Gmail via Web3Forms
+// Contact form submission to Gmail via Web3Forms (JSON format)
 const form = document.getElementById("enquiryForm");
 
 if (form) {
@@ -65,17 +65,25 @@ if (form) {
             return;
         }
 
+        // Disable button while sending
         submitBtn.disabled = true;
         submitBtn.textContent = "Sending...";
         message.style.color = "#1765B5";
         message.textContent = "Sending your enquiry...";
 
+        // Convert form fields to JSON
         const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
 
         try {
             const response = await fetch("https://web3forms.com", {
                 method: "POST",
-                body: formData
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: json
             });
 
             const result = await response.json();
@@ -90,8 +98,9 @@ if (form) {
                 message.textContent = "Error: " + (result.message || "Please check your Access Key.");
             }
         } catch (error) {
+            console.error("Web3Forms Error:", error);
             message.style.color = "#D93025";
-            message.textContent = "Network error. Please check your connection and try again.";
+            message.textContent = "Network error: Request was blocked or offline. Try disabling ad-blockers.";
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = "Submit Enquiry →";
